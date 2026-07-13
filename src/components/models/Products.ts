@@ -1,8 +1,8 @@
-import { IProduct } from '../../types';
+import { IProduct } from "../../types";
 
 export class Products {
-  products: IProduct[] = [];
-  selectedProduct: IProduct | null = null;
+  private products: IProduct[] = [];
+  private selectedProduct: IProduct | null = null;
 
   setProducts(list: IProduct[]) {
     this.products = list;
@@ -17,10 +17,10 @@ export class Products {
   }
 
   getSelectedProduct(): IProduct | null {
-    return this.selectedProduct
+    return this.selectedProduct;
   }
 
   getProductById(id: string): IProduct | undefined {
-    return this.products.find(item => item.id === id)
+    return this.products.find((item) => item.id === id);
   }
 }

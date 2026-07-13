@@ -1,10 +1,14 @@
-export type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
+export type ApiPostMethods = "POST" | "PUT" | "DELETE";
 
-export type TPayment = 'online' | 'offline';
+export type TPayment = "online" | "offline";
 
 export interface IApi {
-    get<T extends object>(uri: string): Promise<T>;
-    post<T extends object>(uri: string, data: object, method?: ApiPostMethods): Promise<T>;
+  get<T extends object>(uri: string): Promise<T>;
+  post<T extends object>(
+    uri: string,
+    data: object,
+    method?: ApiPostMethods,
+  ): Promise<T>;
 }
 
 export interface IProduct {
@@ -17,18 +21,13 @@ export interface IProduct {
 }
 
 export interface IBuyer {
-  payment: TPayment;
+  payment: TPayment | null;
   email: string;
   phone: string;
   address: string;
 }
 
-export interface IValidationErrors {
-  payment?: string;
-  email?: string;
-  phone?: string;
-  address?: string; 
-}
+export type IValidationErrors = Partial<Record<keyof IBuyer, string>>;
 
 export interface IProductsResponse {
   total: number;

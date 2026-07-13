@@ -1,10 +1,10 @@
-import { IBuyer, IValidationErrors, TPayment } from '../../types';
+import { IBuyer, IValidationErrors, TPayment } from "../../types";
 
 export class Buyer {
-  payment: TPayment | null = null;
-  email: string | null = null;
-  phone: string | null = null;
-  address: string | null = null;
+  private payment: TPayment | null = null;
+  private email: string = "";
+  private phone: string = "";
+  private address: string = "";
 
   setPayment(payment: TPayment) {
     this.payment = payment;
@@ -24,36 +24,36 @@ export class Buyer {
 
   getBuyerData(): IBuyer {
     return {
-      payment: this.payment!,
-      email: this.email!,
-      phone: this.phone!,
-      address: this.address!
-    }
+      payment: this.payment,
+      email: this.email,
+      phone: this.phone,
+      address: this.address,
+    };
   }
 
   clearBuyerData() {
     this.payment = null;
-    this.email = null;
-    this.phone = null;
-    this.address = null;
+    this.email = "";
+    this.phone = "";
+    this.address = "";
   }
 
   validate(): IValidationErrors {
     const errors: IValidationErrors = {};
 
     if (!this.payment) {
-      errors.payment = "Не выбран вид оплаты"
-    } 
+      errors.payment = "Не выбран вид оплаты";
+    }
     if (!this.email) {
-      errors.email = "Введите email"
-    } 
+      errors.email = "Введите email";
+    }
     if (!this.phone) {
-      errors.phone = "Введите телефон"
+      errors.phone = "Введите телефон";
     }
     if (!this.address) {
-      errors.address = "Введите адрес"
+      errors.address = "Введите адрес";
     }
-    
-    return errors
+
+    return errors;
   }
 }

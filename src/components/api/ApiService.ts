@@ -1,7 +1,7 @@
 import { IApi, IOrderRequest, IOrderResponse, IProductsResponse } from "../../types";
 
 export class ApiService {
-  api: IApi;
+  private api: IApi;
 
   constructor(api: IApi) {
     this.api = api;
