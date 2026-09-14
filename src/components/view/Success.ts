@@ -20,10 +20,13 @@ export class Success extends Component<ISuccess> {
       ".order-success__description",
       this.container,
     );
-    this.closeButton = ensureElement<HTMLButtonElement>(".order-success__close", this.container);
+    this.closeButton = ensureElement<HTMLButtonElement>(
+      ".order-success__close",
+      this.container,
+    );
 
     this.closeButton.addEventListener("click", () => {
-      this.events.emit("modal:close");
+      this.events.emit("success:close");
     });
   }
 

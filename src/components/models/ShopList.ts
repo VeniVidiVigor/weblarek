@@ -12,19 +12,19 @@ export class ShopList {
 
   addSelectedProduct(product: IProduct) {
     this.selectedProducts.push(product);
-    this.events.emit("basket:changed", { products: this.selectedProducts });
+    this.events.emit("basket:changed");
   }
 
   deleteSelectedProduct(product: IProduct) {
     this.selectedProducts = this.selectedProducts.filter(
       (i) => i.id !== product.id,
     );
-    this.events.emit("basket:changed", { products: this.selectedProducts });
+    this.events.emit("basket:changed");
   }
 
   clearSelectedProducts() {
     this.selectedProducts = [];
-    this.events.emit("basket:changed", { products: this.selectedProducts });
+    this.events.emit("basket:changed");
   }
 
   getPriceSelectedProducts(): number {

@@ -9,12 +9,12 @@ export class Products {
 
   setProducts(list: IProduct[]) {
     this.products = list;
-    this.events.emit("products:changed", { products: this.products });
+    this.events.emit("products:changed");
   }
 
   setSelectedProduct(item: IProduct) {
     this.selectedProduct = item;
-    this.events.emit("product:selected", { product: this.selectedProduct });
+    this.events.emit("product:selected");
   }
 
   getProducts(): IProduct[] {
