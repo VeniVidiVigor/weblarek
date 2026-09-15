@@ -172,12 +172,15 @@ events.on("buyer:changed", () => {
   const errors = buyerModel.validate();
 
   orderView.render({
-    ...(buyer.payment ? { payment: buyer.payment } : {}),
+    payment: buyer.payment,
+    address: buyer.address,
     valid: !errors.payment && !errors.address,
     errors: [errors.payment, errors.address].filter(Boolean).join(". "),
   });
 
   contactsView.render({
+    email: buyer.email,
+    phone: buyer.phone,
     valid: !errors.email && !errors.phone,
     errors: [errors.email, errors.phone].filter(Boolean).join(". "),
   });
@@ -186,17 +189,15 @@ events.on("buyer:changed", () => {
 events.on("contacts:submit", () => {
   const buyer = buyerModel.getBuyerData();
   const total = shopListModel.getPriceSelectedProducts();
-  const items = shopListModel
-    .getSelectedProducts()
-    .map((product) => product.id);
+  const items = shopListModel.getSelectedProducts().map((product) => product.id);
 
   apiService
     .createOrder({ ...buyer, total, items })
-    .then(() => {
+    .then((response) => {
       shopListModel.clearSelectedProducts();
       buyerModel.clearBuyerData();
 
-      modal.render({ content: successView.render({ total }) });
+      modal.render({ content: successView.render({ total: response.total }) });
       modal.open();
     })
     .catch((error) => {

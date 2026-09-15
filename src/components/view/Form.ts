@@ -10,22 +10,20 @@ interface IFormState {
 export abstract class FormBase<T extends IFormState> extends Component<T> {
   protected submitButton: HTMLButtonElement;
   protected errorsElement: HTMLElement;
-  protected formName: string;
 
   constructor(
     protected events: IEvents,
-    container: HTMLFormElement,
+    protected container: HTMLFormElement,
   ) {
     super(container);
 
-    this.formName = container.name;
     this.submitButton = ensureElement<HTMLButtonElement>('button[type="submit"]', container);
     this.errorsElement = ensureElement<HTMLElement>(".form__errors", container);
 
     container.addEventListener("input", (event) => {
       const target = event.target as HTMLInputElement;
       if (target.name) {
-        this.events.emit(`${this.formName}.${target.name}:change`, {
+        this.events.emit(`${this.container.name}.${target.name}:change`, {
           value: target.value,
         });
       }
@@ -33,7 +31,7 @@ export abstract class FormBase<T extends IFormState> extends Component<T> {
 
     container.addEventListener("submit", (event) => {
       event.preventDefault();
-      this.events.emit(`${this.formName}:submit`);
+      this.events.emit(`${this.container.name}:submit`);
     });
   }
 
